@@ -1,0 +1,2 @@
+class NicesController < ApplicationController
+end
