@@ -1,0 +1,74 @@
+<div class="container px-5 px-sm-0">
+
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+ <center>
+  <div style="padding-top:30px;">
+   <div class="col-5 col-sm-4 text-left">
+    <h2>アカウントを作成</h2>
+   </div>
+  </div>
+
+  <div class="field">
+   <div style="padding-top:20px;">
+    <div class="col-5 col-sm-4 text-left">
+     <p>ユーザーネーム</p>
+     <%= f.text_field :name, :size=>"30px", autofocus: true, autocomplete: "name" %>
+    </div>
+   </div>
+  </div>
+
+  <div class="field">
+   <div style="padding-top:20px;">
+    <div class="col-5 col-sm-4 text-left">
+     <p>Eメールアドレス</p>
+     <%= f.email_field :email, :size=>"50px", autofocus: true, autocomplete: "email" %>
+    </div>
+  </div>
+
+  <div class="field">
+   <div style="padding-top:20px;">
+    <div class="col-5 col-sm-4 text-left">
+     <% if @minimum_password_length %>
+      <p>パスワード<em>（最低でも<%= @minimum_password_length %> 文字にしてください）</em></p>
+     <% end %>
+     <%= f.password_field :password, :size=>"30px", autocomplete: "new-password" %>
+    </div>
+   </div>
+  </div>
+
+  <div class="field">
+   <div style="padding-top:20px;">
+    <div class="col-5 col-sm-4 text-left">
+     <p>パスワード（確認用）</p>
+     <%= f.password_field :password_confirmation, :size=>"30px", autocomplete: "new-password" %>
+    </div>
+   </div>
+  </div>
+
+  <div class="actions">
+   <div style="padding-top:20px; ">
+    <div class="p-1 mb-1">
+     <%= f.submit "登録", class: "btn btn-primary sign-btn" %>
+    </div>
+   </div>
+  </div>
+
+<% end %>
+  <div class="col-5 col-sm-4">
+  <div style="padding-top:20px;">
+   <div class="row">
+    <div>
+     <p>すでにアカウントをお持ちの方は</p>
+    </div>
+    <div style="padding-left:20px;">
+     <%= link_to "ログイン", new_user_session_path, class: "btn btn-success" %>
+    </div>
+   </div>
+  </div>
+  </div>
+
+ </center>
+</div>
