@@ -1,0 +1,77 @@
+<div class="container px-6 px-sm-0">
+ <div class="container row" style="padding-top:10px">
+
+  <div class="col-md-6">
+   <%= render 'posts/post', posts: @post %>
+  </div>
+
+  <div class="col-md-6 shadow p-3 mb-3 bg-white" >
+   <div >
+    <%= attachment_image_tag @post, :image, class: 'show-img' %>
+   </div>
+   <div class="contents" style="padding-top:25px">
+     <%= @post.contents %>
+   </div>
+   <div class="tag" style="padding-top:20px">
+    <% @post.tag_list.each  do |tag| %>
+     <%= tag %>
+    <% end %>
+   </div>
+
+   <div class="row align-items-center">
+    <div class="favorites" style="padding-top:30px; padding-left:10px">
+     <% if current_user.already_favorited?(@post) %>
+      <p>
+       <%= link_to post_favorites_path(@post), method: :delete do %>
+        <i class="fas fa-heart unlike-btn"></i>
+        <%= @post.favorited_users.count %>
+       <% end %>
+      </p>
+     <% else %>
+      <p>
+        <%= link_to post_favorites_path(@post), method: :post do %>
+         <i class="far fa-heart like-btn" ></i>
+         <%= @post.favorited_users.count %>
+        <% end %>
+      </p>
+     <% end %>
+    </div>
+    <div class="ml-auto" style="padding-right:50px;">
+     <% if @post.user == current_user %>
+      <%= link_to "編集",edit_post_path(@post), class: "btn btn-secondary" %>
+     <% else %>
+      <div></div>
+     <% end %>
+    </div>
+   </div>
+
+   <div class="comment" >
+     <P>コメント　<%= @post.post_comments.count %>件</P>
+    <div>
+     <% @post.post_comments.each do |post_comment| %>
+     <div class="row col-6">
+      <p><%= post_comment.user.name %></p>
+      <P style="padding-left:20px"><%= post_comment.created_at.strftime('%Y/%m/%d') %>投稿</P>
+     </div>
+     <div class="row alert alert-primary">
+      <div class="col-6">
+       <%= post_comment.comment %>
+      </div>
+      <% if post_comment.user == current_user %>
+      <div class="ml-auto" style="padding-right:30px">
+       <div>
+
+       </div>
+       <div>
+        <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class: "btn btn-success" %>
+       </div>
+      </div>
+      <% end %>
+
+     </div>
+     <% end %>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>

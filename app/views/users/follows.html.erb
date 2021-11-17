@@ -1,0 +1,26 @@
+<div class="container px-5 px-sm-0">
+ <center>
+  <div style="padding-top:30px;">
+    <h4>フォロー</h4>
+  </div>
+
+  <div class="list col-md-7" style="padding-top:20px;">
+  <% @users.each do |user| %>
+   <div class="align-items-center container row p-1 mb-2 list-group-item-info" style="height:auto; padding-top:15px;">
+    <div class="image">
+        <% if user.image? %>
+         <%= image_tag user.image.url, size: "50", class: "user-icon" %>
+        <% else %>
+         <%= image_tag 'default.png', size: "50", class: "user-icon" %>
+        <% end %>
+    </div>
+    <div class="list-name" style="padding-top:10px;">
+     <%= link_to user_path(user.id), class: "text-dark" do %>
+      <%= user.name %>
+     <% end %>
+    </div>
+   </div>
+  <% end %>
+  </div>
+ </center>
+</div>

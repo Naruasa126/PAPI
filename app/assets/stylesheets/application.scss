@@ -18,4 +18,13 @@
  .sign-btn {
   width: 350px;
   height: 40px;
+  max-width: 100%;
+  height: auto;
 }
+
+ .row-eq-height {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+

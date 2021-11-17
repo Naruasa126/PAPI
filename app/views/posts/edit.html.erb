@@ -1,0 +1,126 @@
+<div class="container px-6 px-sm-0">
+ <center>
+  <div style="padding-top:10px;">
+   <div class="col-5 col-sm-5">
+    <h3>投稿編集</h3>
+   </div>
+  </div>
+ </center>
+
+ <%= form_with model: @post, local: true do |f| %>
+ <div class="container row">
+
+  <div class="col-md-6">
+   <div class="row" style="padding-bottom:10px">
+    <div class="image">
+     <% if @post.user.image? %>
+       <%= image_tag @post.user.image.url, size: "50", class: "user-icon" %>
+     <% else %>
+       <%= image_tag 'default.png', size: "50", class: "user-icon" %>
+     <% end %>
+    </div>
+    <h4 class="align-self-center" style="padding-left:20px"><%= @post.user.name %></h4>
+   </div>
+    <p class="bg-secondary text-white" style="padding-left:20px">場所：　<%= @post.address %></p>
+   <div class="map" style="padding-top:10px">
+    <div id="map"></div>
+    <style>
+     #map{
+      height: 400px;
+      width: 100%;
+     }
+    </style>
+
+    <script type="text/javascript">
+    function initMap() {
+     if(document.getElementById('map')){
+      var test ={lat:<%= @post.map.latitude %>, lng:<%= @post.map.longitude %>};
+      var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: test
+                });
+      var transitLayer = new google.maps.TransitLayer();
+      transitLayer.setMap(map);
+
+      var contentString = '<%= @post.address %>';
+      var infowindow = new google.maps.InfoWindow({
+          content: contentString
+          });
+
+      var marker = new google.maps.Marker({
+                   position:test,
+                   map: map,
+                   title: contentString
+                   });
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      } );
+     }else{
+      myLatLng = {lat: 35.68090045006303, lng: 139.76690798417752}
+      map_lat = document.getElementById('post_map_latitude')
+      map_lng = document.getElementById('post_map_longitude')
+      marker = new google.maps.Marker();
+
+      map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 12
+            });
+      }
+    }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_KEY'] %>&callback=initMap"></script>
+   </div>
+  </div>
+
+  <div class="col-md-6">
+   <div class="field">
+    <div style="padding-top:20px">
+      <p>投稿画像</p>
+        <%= attachment_image_tag @post, :image, size:"100x80"%>
+        <%= f.attachment_field :image %>
+    </div>
+   </div>
+
+   <div class="field">
+    <div style="padding-top:10px;">
+      <%= f.text_area :contents, :size=>"40x3", placeholder:"内容を入力してください", class: "form-control" %>
+    </div>
+   </div>
+
+   <div class="field">
+    <div style="padding-top:10px;">
+      <p>タグ</p>
+      <%= f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control" %>
+    </div>
+   </div>
+
+   <div class="field">
+    <div style="padding-top:10px;">
+       <p>撮影ポイント</p>
+       <div class='map-btn'>
+        <%= f.text_field :address, placeholder:"（例）羽田空港第２ターミナル展望デッキ", class: "form-control"  %>
+       </div>
+    </div>
+   </div>
+
+
+   <div class="field text-center">
+     <div style="padding-top:20px;">
+      <%= f.submit "変更する", class: "btn btn-success sign-btn" %>
+     </div>
+     <div style="padding-top:10px;">
+       <% if @post.user == current_user %>
+        <%= link_to "投稿を削除", post_path(@post), method: :delete, class: "btn btn-danger sign-btn" %>
+       <% else %>
+        <div></div>
+       <% end %>
+     </div>
+   </div>
+  <% end %>
+  </div>
+ </div>
+
+
+</div>

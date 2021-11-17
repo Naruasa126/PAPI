@@ -1,2 +1,47 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<div class="container px-5 px-sm-0">
+ <center>
+  <div style="padding-top:40px;">
+    <h4>プロフィール編集</h4>
+  </div>
+
+ <%= form_with model: @user,  url: user_path(current_user), local: true do |f| %>
+  <div class="col-6" style="padding-top:20px;">
+   <div class="col-10 row align-items-center">
+     <div class="image">
+      <% if @user.image? %>
+       <%= image_tag @user.image.url, size: "80", class: "user-icon" %>
+      <% else %>
+       <%= image_tag 'default.png', size: "80", class: "user-icon" %>
+      <% end %>
+     </div>
+     <div class="field">
+      <div style="padding-top:50px">
+       <div class="col-10 text-left">
+        <p>プロフィール画像</p>
+        <%= f.attachment_field :image %>
+       </div>
+      </div>
+     </div>
+   </div>
+   <div class="field">
+    <div style="padding-top:50px;">
+     <div class="col-10 row">
+       <P >自己紹介</P>
+       <div style="padding-left:25px">
+         <%= f.text_area :introduction, :size=>"35x3", placeholder:"内容を入力してください", class: "form-control" %>
+       </div>
+     </div>
+    </div>
+   </div>
+   <div class="field">
+    <div style="padding-top:50px; padding-bottom:50px;">
+     <div class="col-10 text-center">
+      <%= f.submit "変更する", class: "btn btn-success sign-btn" %>
+     </div>
+    </div>
+   </div>
+
+  </div>
+ <% end %>
+ </center>
+</div>

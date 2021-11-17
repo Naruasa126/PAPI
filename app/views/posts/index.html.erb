@@ -1,0 +1,162 @@
+<div class="container col-11">
+ <div class="row">
+  <div class="col-md-4 shadow p-3 mb-3 bg-white">
+   <h4 class="text-center text-primary">いいね上位ランキング</h4>
+   <% @all_ranks.each.with_index(1) do |post,i| %>
+    <div class="card-deck">
+     <div class="col-auto" style="padding-top:25px">
+      <h5 class="text-danger">第<%= i %>位</h5>
+      <div class="card shadow pt-3 px-3 md-0" style="width: auto">
+       <div class="card-img">
+        <%= link_to post_path(post.id) do %>
+          <%= attachment_image_tag post, :image,  class: 'card-img-top' %>
+        <% end %>
+       </div>
+
+       <div class="card-body" style="padding:5px;">
+       <font size="3">
+        <div class="card-address text-truncate"><%= post.contents %></div>
+        <small class="card-text"></small>
+        <div class="card-tag">
+         <small>
+          <% post.tag_list.each do |tag| %>
+           <%= tag %>
+          <% end %>
+         </small>
+        </div>
+        <div class="row">
+         <div class="card-comment col-lg-5">
+          <%= link_to "#{post.post_comments.count} コメント", post_path(post.id), class:"btn btn-info" %>
+         </div>
+         <div class="card-favorites">
+          <% if current_user.already_favorited?(post) %>
+           <p>
+            <%= link_to post_favorites_path(post.id), method: :delete do %>
+             <i class="fas fa-heart unlike-btn"></i>
+             <%= post.favorited_users.count %>
+            <% end %>
+           </p>
+          <% else %>
+           <p>
+            <%= link_to post_favorites_path(post.id,), method: :post do %>
+              <i class="far fa-heart like-btn" ></i>
+              <%= post.favorited_users.count %>
+            <% end %>
+           </p>
+          <% end %>
+         </div>
+        </div>
+       </font>
+       </div>
+
+       <div class="card-footer p-0 row align-items-center" >
+         <div class="image" style="padding-left:10px">
+          <%= link_to user_path(post.user.id), class: "text-dark" do %>
+          <% if post.user.image? %>
+           <%= image_tag post.user.image.url, size: "50", class: "user-icon" %>
+          <% else %>
+           <%= image_tag 'default.png', size: "50", class: "user-icon" %>
+          <% end %>
+         </div>
+         <div class="name align-self-center" style="padding-left:10px;">
+          <%= post.user.name %>
+          <% end %>
+         </div>
+        <div class="follow ml-auto" style="padding-right:10px" >
+          <% if current_user != post.user %>
+           <% if post.user.followed_by?(current_user) %>
+             <%= link_to "フォロー済み", user_relationships_path(post.user.id), method: :delete, class: "btn btn-secondary" %>
+           <% else %>
+             <%= link_to "フォローする", user_relationships_path(post.user.id), method: :post, class: "btn btn-primary" %>
+           <% end %>
+          <% end %>
+        </div>
+       </div>
+
+      </div>
+     </div>
+    </div>
+   <% end %>
+  </div>
+
+  <div class="col-md-8 align-self-start row justify-content-around" >
+   <% @posts.each do |post| %>
+    <div class="card-deck">
+     <div class="col-lg-4" style="padding-top:25px; padding-bottom:25px">
+      <div class="card shadow pt-3 px-3 md-0 h-100" style="width: 22rem">
+       <div class="card-img">
+        <%= link_to post_path(post.id) do %>
+          <%= attachment_image_tag post, :image,  class: 'card-img-top' %>
+        <% end %>
+       </div>
+
+       <div class="card-body" style="padding:5px;">
+       <font size="3">
+        <div class="card-address text-truncate"><%= post.contents %></div>
+        <small class="card-text"><%= post.address %></small>
+        <div class="card-tag">
+         <small>
+          <% post.tag_list.each do |tag| %>
+           <%= tag %>
+          <% end %>
+         </small>
+        </div>
+        <div class="row">
+        <% if user_signed_in? %>
+         <div class="card-comment col-lg-5">
+          <%= link_to "#{post.post_comments.count} コメント", post_path(post.id), class:"btn btn-info" %>
+         </div>
+         <div class="card-favorites">
+          <% if current_user.already_favorited?(post) %>
+           <p>
+            <%= link_to post_favorites_path(post.id), method: :delete do %>
+             <i class="fas fa-heart unlike-btn"></i>
+             <%= post.favorited_users.count %>
+            <% end %>
+           </p>
+          <% else %>
+           <p>
+            <%= link_to post_favorites_path(post.id,), method: :post do %>
+              <i class="far fa-heart like-btn" ></i>
+              <%= post.favorited_users.count %>
+            <% end %>
+           </p>
+          <% end %>
+         </div>
+        <% end %>
+        </div>
+       </font>
+       </div>
+
+       <div class="card-footer p-0 row align-items-center" >
+        <div class="image" style="padding-left:10px">
+         <%= link_to user_path(post.user.id), class: "text-dark" do %>
+          <% if post.user.image? %>
+           <%= image_tag post.user.image.url, size: "50", class: "user-icon" %>
+          <% else %>
+           <%= image_tag 'default.png', size: "50", class: "user-icon" %>
+          <% end %>
+        </div>
+        <div class="name align-self-center" style="padding-left:10px;">
+         <%= post.user.name %>
+         <% end %>
+        </div>
+        <div class="follow ml-auto" style="padding-right:10px" >
+          <% if current_user != post.user %>
+           <% if post.user.followed_by?(current_user) %>
+             <%= link_to "フォロー済み", user_relationships_path(post.user.id), method: :delete, class: "btn btn-secondary" %>
+           <% else %>
+             <%= link_to "フォローする", user_relationships_path(post.user.id), method: :post, class: "btn btn-primary" %>
+           <% end %>
+          <% end %>
+        </div>
+       </div>
+
+      </div>
+     </div>
+    </div>
+   <% end %>
+  </div>
+
+ </div>
+</div>

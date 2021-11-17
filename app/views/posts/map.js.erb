@@ -1,0 +1,14 @@
+console.log('hoge')
+
+(function(){
+  let pos = new google.maps.LatLng(
+   <%= @latlng[0] %>, //latitude
+   <%= @latlng[1] %>  //longitude
+  );
+
+  mapInstance.setCenter(pos)
+  let marker = new google.maps.Marker({
+    map: mapInstance,
+    position: pos
+  });
+})()
