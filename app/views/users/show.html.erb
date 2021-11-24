@@ -1,9 +1,9 @@
-<div class="container px-6 px-sm-0">
-  <h4 class="col-md-11" style="padding-top:25px">マイページ</h4>
+<div class="container col-10 col-xs-9">
+  <h4  style="padding-top:25px">マイページ</h4>
 
-  <div class="container row col-sm-11 " style="padding-top:25px">
-    <div class="user row align-items-center">
-     <div class="image">
+  <div class="user" style="padding-top:25px">
+    <div class="row align-items-center justify-content-around">
+     <div class="col-xs-1 image">
         <% if @user.image? %>
          <%= image_tag @user.image.url, size: "80", class: "user-icon" %>
         <% else %>
@@ -11,11 +11,11 @@
         <% end %>
      </div>
 
-     <p class="align-self-center" style="padding-left:25px">ユーザーネーム：　<%= @user.name %></p>
-     <div class="introduction" style="padding-left:25px" >
+     <p class="col-xs-3 align-self-center" style="padding:10px">ユーザーネーム：　<%= @user.name %></p>
+     <div class="introduction">
       <p><%= @user.introduction %></p>
      </div>
-     <div class="follow" style="padding-left:25px" >
+     <div class="col-xs-1 follow"  >
       <% if current_user != @user %>
        <% if @user.followed_by?(current_user) %>
         <%= link_to "フォロー済み", user_relationships_path(@user.id), method: :delete, class: "btn btn-secondary" %>
@@ -25,7 +25,7 @@
       <% end %>
      </div>
 
-     <div class="follow" style="padding-left:10px">
+     <div class="col-xs-2 follow" style="padding:5px">
      <center>
       <%=link_to follows_user_path(@user.id), class: "btn btn-success" do %>
        <%= @user.followings.count %>
@@ -33,7 +33,7 @@
       <% end %>
      </center>
      </div>
-     <div class="followers" style="padding-left:10px">
+     <div class="col-xs-2 followers" style="padding:5px">
      <center>
       <%=link_to followers_user_path(@user.id), class: "btn btn-success" do %>
        <%= @user.followers.count %>
@@ -42,10 +42,10 @@
      </center>
      </div>
      <% if @user == current_user %>
-      <div class="link" style="padding-left:10px; padding-top:10px">
+      <div class=" link" style="padding:5px;">
        <%= link_to 'プロフィール編集', edit_user_path(current_user), class:"btn btn-secondary" %>
       </div>
-      <div class="link" style="padding-left:10px; padding-top:10px">
+      <div class=" link" style="padding:5px;">
        <% if user_signed_in? && @user.id == current_user.id %>
         <%= link_to "退会", unsubscribe_path, class: "btn btn-outline-danger" %>
        <% end %>
@@ -56,11 +56,11 @@
     </div>
   </div>
 
-  <div class="post row">
+  <div class="post col-xs-8 row justify-content-around">
    <% @post.each do |post| %>
-    <div class="card-deck row-eq-height">
-     <div class="col-md-4" style="padding-top:25px">
-      <div class="card shadow pt-3 px-3 md-0 h-100" style="width: 22rem">
+    <div class="card-deck row">
+     <div class="col-auto" style="padding-top:25px">
+      <div class="card shadow pt-3 px-3 h-100" style="width: 20rem">
        <div class="card-img">
         <%= link_to post_path(post.id) do %>
           <%= attachment_image_tag post, :image,  class: 'card-img-top' %>
@@ -79,7 +79,7 @@
          </small>
         </div>
         <div class="row">
-         <div class="card-comment col-lg-5">
+         <div class="card-comment col-lg-6">
           <%= link_to "#{post.post_comments.count} コメント", post_path(post.id), class:"btn btn-info" %>
          </div>
          <div class="card-favorites">

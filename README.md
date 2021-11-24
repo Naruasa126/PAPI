@@ -36,8 +36,7 @@ https://docs.google.com/spreadsheets/d/1uW5gU7f2MuorA3zmUL4maxI1_GOBxXeAJY0GXQtd
 https://docs.google.com/spreadsheets/d/1uW5gU7f2MuorA3zmUL4maxI1_GOBxXeAJY0GXQtd1n4/edit?usp=sharing
 
 ## 開発環境
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- 言語：HTML,CSS,JavaScript,Ruby
 - フレームワーク：Ruby on Rails
-- Gem：devise
 - サーバ環境：AWS
 - IDE：Cloud9

@@ -1,8 +1,19 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-
+* {
+    margin: 0px;
+    padding: 0px;
+    float: none;
+	position: static;
+}
+@media (max-width: 500px) {
+    .card {
+      width: 80%;
+      display: inline-block;
+      padding: 10px;
+    }
+}
 .card-img-top {
   border-radius: 5px 5px 0 0;
   max-width: 100%;

@@ -1,10 +1,10 @@
-<div class="container px-5 px-sm-0">
+<div class="container col-md-5 mb-1">
  <center>
   <div style="padding-top:30px;">
     <h4>ユーザー</h4>
   </div>
 
-  <div class="list col-md-7" style="padding-top:20px;">
+  <div class="list" style="padding-top:20px;">
   <% @users.each do |user| %>
    <div class="align-items-center container row p-1 mb-2 list-group-item-info" style="height:auto; padding-top:15px;">
     <div class="image">
@@ -19,7 +19,7 @@
       <%= user.name %>
      <% end %>
     </div>
-    <div class="follow ml-auto" style="padding-right:50px;">
+    <div class="follow ml-auto" >
     <% if current_user != user %>
      <% if user.followed_by?(current_user) %>
       <%= link_to "フォロー済み", user_relationships_path(user.id), method: :delete, class: "btn btn-secondary" %>

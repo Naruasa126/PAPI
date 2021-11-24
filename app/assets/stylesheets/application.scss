@@ -27,4 +27,24 @@
     flex-wrap: wrap;
 }
 
+@media (max-width: 500px) {
+  input[type="text"] {
+        width: 90%;
+        height: 30px;
+    }
+  input[type="email"] {
+        width: 90%;
+        height: 30px;
+    }
+
+  input[type="password"] {
+        width: 90%;
+        height: 30px;
+    }
+}
+
+
+
+
+
 

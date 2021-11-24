@@ -2,9 +2,171 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.center {
-  background-image: image-url('2243382_s.jpg');
-  background-size: cover;
-  background-position: 50% 50%;
+* {
+    margin: 0px;
+    padding: 0px;
+    float: none;
+	position: static;
+}
 
+@media (max-width: 500px) {
+  .img-about {
+    h1 {
+     font-size: 25px;
+    }
+    p {
+      font-size: 15px;
+    }
+    span {
+      font-size: 15px;
+    }
+  }
+
+  .date {
+      width: 10%;
+      padding: 0 20px 0 0;
+      font-size: 12px;
+  }
+  .content {
+      left: 10px;
+      position: static;
+      width: 30%;
+      padding: 0 0 0 0;
+      font-size: 12px;
+      h4{
+        font-size: 20px;
+      }
+  }
+  .timeline {
+      &-list {
+       padding: 5px 0;
+      }
+      &-item {
+       font-size: 16px;
+       right: 50px;
+      }
+      &::before {
+       display: none !important;
+      }
+  }
+}
+
+@media screen and (min-width:500px) and (max-width:959px) {
+  .img-about {
+    h1 {
+     font-size: 35px;
+    }
+    p {
+      font-size: 20px;
+    }
+    span {
+      font-size: 20px;
+    }
+  }
+
+  .timeline {
+    width: 100%;
+    max-width: 100%;
+    margin:  auto;
+    border: 1px solid #eeeeee;
+
+    &-list {
+     padding: 20px 0;
+
+     &-item {
+      display: flex;
+      font-size: 16px;
+
+      .date {
+       width: 50%;
+       padding: 0 0 0 20px;
+       display: flex;
+      }
+
+      .content {
+       position: relative;
+       width: 80%;
+       padding: 0 0 0 0;
+       border-left: 1px solid #aaaaaa;
+
+       &::before {
+       content: "";
+        position: absolute;
+        top: 0;
+        left: -10px;
+        width: 20px;
+        height: 20px;
+        background-color: #00c2bc;
+        border-radius: 10px;
+       }
+      }
+     }
+    }
+  }
+}
+
+.img-about {
+  min-height: 100vh;
+  width:auto;
+  height: 100%;
+  background-image: image-url('2243382_s.jpg');
+  background-size: auto 100%;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color:rgba(255,255,255,0.6);
+  background-blend-mode:lighten;
+}
+
+.timeline {
+    width: 96%;
+    max-width: 940px;
+    margin: 28px auto;
+    border: 1px solid #eeeeee;
+
+  &-list {
+   padding: 20px 0;
+
+    &-item {
+     display: flex;
+     font-size: 16px;
+
+     .date {
+      width: 20%;
+      padding: 0 20px 0 20px;
+      font-weight: bold;
+     }
+
+     .content {
+      position: relative;
+      width: 80%;
+      padding: 0 20px 20px 30px;
+      border-left: 1px solid #aaaaaa;
+
+      &::before {
+      content: "";
+       position: absolute;
+       top: 0;
+       left: -10px;
+       width: 20px;
+       height: 20px;
+       background-color: #00c2bc;
+       border-radius: 10px;
+      }
+     }
+    }
+  }
+}
+
+.img-top {
+  min-height: 100vh;
+  width:auto;
+  height: 100%;
+  background-image: image-url('AME619sentaihikou_TP_V4.jpg');
+  background-size: auto 100%;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-color:rgba(255,255,255,0.6);
+  background-blend-mode:lighten;
 }
