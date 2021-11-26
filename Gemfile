@@ -80,3 +80,7 @@ gem 'clockwork'
 gem 'activesupport'
 gem 'carrierwave'
 
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
